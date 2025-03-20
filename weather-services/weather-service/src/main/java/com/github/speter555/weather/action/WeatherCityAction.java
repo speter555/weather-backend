@@ -58,7 +58,11 @@ public class WeatherCityAction extends AbstractBaseAction {
      */
     public WeatherCityResponse getWeatherCity(String city) throws BaseException {
         ParamValidatorUtil.requireNonBlank(city, "city");
-        WeatherCityResponse response = weatherCityResponseCache.get(city);
+        WeatherCityResponse response = new WeatherCityResponse();
+        WeatherCityResponse cacheResult = weatherCityResponseCache.get(city);
+        response.setCity(cacheResult.getCity());
+        response.setDescription(cacheResult.getDescription());
+        response.setTemperature(cacheResult.getTemperature());
         handleSuccessResultType(response);
         return response;
     }

@@ -35,9 +35,8 @@ import hu.icellmobilsoft.coffee.se.logging.Logger;
 /**
  * Health check for database pool availability
  * 
- * @author czenczl
- * @author Imre Scheffer
- * @since 2.5.0
+ * @author speter555
+ * @since 0.1.0
  *
  */
 @ApplicationScoped
@@ -53,13 +52,13 @@ public class DatabasePoolHealthCheck {
     public static final String HIBERNATE_DIALECT = "HIBERNATE_DIALECT";
 
     @Inject
-    private Logger logger;
+    Logger logger;
 
     @Inject
-    private DatabasePoolHealth databasePoolHealth;
+    DatabasePoolHealth databasePoolHealth;
 
     @Inject
-    private Config config;
+    Config config;
 
     private String builderName;
 
@@ -68,12 +67,12 @@ public class DatabasePoolHealthCheck {
      */
     @PostConstruct
     public void initHealthConfig() {
-        // String dialect = config.getValue(HIBERNATE_DIALECT, String.class);
-        // if (dialect.contains(H2_DIALECT)) {
-        builderName = "h2";
-        // } else {
-        // builderName = "other";
-        // }
+        String dialect = config.getValue(HIBERNATE_DIALECT, String.class);
+        if (dialect.contains(H2_DIALECT)) {
+            builderName = "h2";
+        } else {
+            builderName = dialect;
+        }
     }
 
     /**

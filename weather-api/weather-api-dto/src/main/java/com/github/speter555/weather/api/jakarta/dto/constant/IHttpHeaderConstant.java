@@ -19,8 +19,6 @@
  */
 package com.github.speter555.weather.api.jakarta.dto.constant;
 
-import hu.icellmobilsoft.coffee.dto.common.LogConstants;
-
 /**
  * Basic REST HTTP header constants
  *
@@ -29,10 +27,6 @@ import hu.icellmobilsoft.coffee.dto.common.LogConstants;
  */
 
 public interface IHttpHeaderConstant {
-    /**
-     * Session identifier over service. Value is main part of logging
-     */
-    String HEADER_SID = LogConstants.LOG_SESSION_ID;
     /**
      * Application language
      */

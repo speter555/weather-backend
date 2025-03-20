@@ -2,8 +2,8 @@
 # Coffee config
 #-------------------------------
 coffee:
-#  app:
-#    name: ${quarkus.application.name}
+  app:
+    name: ${quarkus.application.name}
   config:
     datasource:
       default:
@@ -22,20 +22,16 @@ mp:
 # Quarkus settings
 #-------------------------------
 quarkus:
-  management:
-    enabled: true
-    port: 9001
   datasource:
-    metrics:
-      enabled: true
     "defaultDS":
       jdbc:
         min-size: 5
         max-size: 20
-        telemetry:
-          enabled: true
         url: jdbc:h2:mem:default
       db-kind: h2
+  management:
+    enabled: true
+    port: 9001
   hibernate-orm:
     packages: com.github.speter555.weather.model,hu.icellmobilsoft.coffee.model.base
     datasource: "defaultDS"
@@ -69,27 +65,14 @@ quarkus:
       - hu.icellmobilsoft.coffee.module.mp.restclient.provider.DefaultBaseExceptionResponseExceptionMapper
   log:
     category:
+      "com.github.speter555":
+        level: ${LOG_COM_GITHUB_SPETER555_LEVEL:INFO}
       "hu.icellmobilsoft":
-        level: ${SAMPLER_LOG_HU_ICELLMOBILSOFT_LEVEL:INFO}
+        level: ${LOG_HU_ICELLMOBILSOFT_LEVEL:INFO}
     console:
-      json: ${SAMPLER_LOG_CONSOLE_JSON_ENABLED:false}
       format: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [traceId=%X{traceId}] [spanId=%X{spanId}] [thread:%t] [%c{10}] [sid:%X{extSessionId}] - %s%E%n"
-    handler:
-      gelf:
-        additional-field:
-          "moduleVersion":
-            value: ${SAMPLER_LOGSTASH_MODULE_VERSION:unknown}
-          "moduleId":
-            value: ${SAMPLER_LOGSTASH_MODULE_ID:unknown}
-          "K8S_NAMESPACE":
-            value: ${SAMPLER_LOGSTASH_K8S_NAMESPACE:unknown}
-        include-full-mdc: false
-        enabled: ${SAMPLER_LOGSTASH_ENABLED:false}
-        host: ${SAMPLER_LOGSTASTH_HOST:tcp:localhost}
-        port: ${SAMPLER_LOGSTASTH_PORT:12201}
-        version: ${SAMPLER_LOGSTASTH_VERSION:1.1}
-    level: ${SAMPLER_LOG_LEVEL:INFO}
-    min-level: ${SAMPLER_LOG_MIN_LEVEL:ALL}
+    level: ${LOG_LEVEL:INFO}
+    min-level: ${LOG_MIN_LEVEL:ALL}
   rest-client:
     "com.github.speter555.weather.restclient.wttrinapi.WttrInRestClient":
       url: https://wttr.in
@@ -101,7 +84,7 @@ quarkus:
       type: fast-jar
       add-runner-suffix: false
   smallrye-openapi:
-    info-title: Quarkus sampler service
+    info-title: Weather service
     info-version: ${quarkus.application.version}
     info-description: >
       REST endpoints for operations. <br/> 

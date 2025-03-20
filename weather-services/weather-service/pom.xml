@@ -13,8 +13,8 @@
 
     <properties>
         <jvm.args>--add-opens=java.base/java.net=ALL-UNNAMED</jvm.args>
-        <version.io.agroal>2.3</version.io.agroal>
-        <quarkus-micrometer-registry-otlp.version>3.2.4</quarkus-micrometer-registry-otlp.version>
+        <quarkus-jaeger.version>1.0.0</quarkus-jaeger.version>
+        <quarkus-smallrye-opentracing.version>1.0.0</quarkus-smallrye-opentracing.version>
     </properties>
 
     <dependencies>
@@ -29,14 +29,11 @@
             <artifactId>weather-common-rest</artifactId>
         </dependency>
 
-        <!-- Coffee dependencies -->
-
         <!-- Quarkus dependencies -->
 
         <dependency>
             <groupId>hu.icellmobilsoft.coffee</groupId>
             <artifactId>coffee-deltaspike-data-extension-deployment</artifactId>
-<!--            TODO + 5MB -->
             <exclusions>
             	<exclusion>
             		<groupId>jakarta.faces</groupId>
@@ -68,24 +65,8 @@
             <artifactId>quarkus-hibernate-orm</artifactId>
         </dependency>
         <dependency>
-          <groupId>io.agroal</groupId>
-          <artifactId>agroal-pool</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.agroal</groupId>
-          <artifactId>agroal-api</artifactId>
-        </dependency>
-        <dependency>
-           	<groupId>io.agroal</groupId>
-        	<artifactId>agroal-narayana</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-h2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-oracle</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -127,18 +108,6 @@
             <artifactId>quarkus-smallrye-openapi</artifactId>
         </dependency>
 
-        <!-- Quarkus dependecies - Gelf logging -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-logging-gelf</artifactId>
-        </dependency>
-
-        <!-- Quarkus dependecies - Json logging -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-logging-json</artifactId>
-        </dependency>
-
         <!-- Quarkus dependecies - Rest client -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -157,6 +126,26 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+
+
+        <!-- Quarkus dependecies - OpenTracing use it is only for backward compatibility-->
+        <dependency>
+            <groupId>io.quarkiverse.jaeger</groupId>
+            <artifactId>quarkus-jaeger</artifactId>
+            <version>${quarkus-jaeger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkiverse.opentracing</groupId>
+            <artifactId>quarkus-smallrye-opentracing</artifactId>
+            <version>${quarkus-smallrye-opentracing.version}</version>
+        </dependency>
+
+        <!-- Quarkus dependecies - Metrics -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
         </dependency>
 
         <!-- Test dependencies -->

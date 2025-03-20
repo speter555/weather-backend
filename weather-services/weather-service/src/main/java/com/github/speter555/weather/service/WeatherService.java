@@ -24,9 +24,9 @@ import java.util.Optional;
 import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 
+import com.github.speter555.weather.common.jpa.service.ProjectBaseService;
 import com.github.speter555.weather.model.Weather;
 import com.github.speter555.weather.repository.WeatherRepository;
-import hu.icellmobilsoft.coffee.jpa.service.BaseService;
 import hu.icellmobilsoft.coffee.se.api.exception.BaseException;
 
 /**
@@ -36,7 +36,7 @@ import hu.icellmobilsoft.coffee.se.api.exception.BaseException;
  * @since 0.1.0
  */
 @Model
-public class WeatherService extends BaseService<Weather> {
+public class WeatherService extends ProjectBaseService<Weather> {
 
     @Inject
     WeatherRepository repository;

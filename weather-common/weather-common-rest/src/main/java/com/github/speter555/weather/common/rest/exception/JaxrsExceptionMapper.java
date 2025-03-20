@@ -20,6 +20,7 @@
 package com.github.speter555.weather.common.rest.exception;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -41,7 +42,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.mock.MockHttpRequest;
 import org.jboss.resteasy.spi.HttpRequest;
 import org.jboss.resteasy.spi.Registry;
@@ -142,7 +142,7 @@ public class JaxrsExceptionMapper implements ExceptionMapper<WebApplicationExcep
         if (accept != null && ((accept.indexOf("json") < 1 && accept.indexOf("xml") < 1) || !accept.startsWith("application"))) {
             accept = MediaType.APPLICATION_XML;
         }
-        return Response.fromResponse(e.getResponse()).entity(dto).type(StringUtils.defaultString(accept, MediaType.APPLICATION_XML)).build();
+        return Response.fromResponse(e.getResponse()).entity(dto).type(Objects.toString(accept, MediaType.APPLICATION_XML)).build();
     }
 
     private String getNotAcceptableMessage() {

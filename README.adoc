@@ -1,0 +1,169 @@
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 4
+
+= weather-backend
+
+Weather backend that is use wttr.in
+
+== Used technologies
+
+* Coffee 2.0.0+ +
+"Java EE solution set aimed at gathering common algorithms used in the enterprise world, providing fundamental solutions that can be customized to meet specific needs." (https://github.com/i-Cell-Mobilsoft-Open-Source/coffee) +
+* Java 17+
+* Maven 3.8.2+
+* Jakarta EE 10+
+* CDI 4.0+
+* Microprofile 6.0+
+* Quarkus 3.16.4+
+
+== Useful commands and accesses
+
+Commands used for development purposes,
+which are used to build and start development environments.
+
+The application can be started in several ways:
+
+* Starting Quarkus dev with Maven
+* Creating a Quarkus uber-jar and running this jar file using `java -jar`
+** Placing the same jar into a Java Docker image and running it (using local.Dockerfile)
+* Certain IDEs natively include a Quarkus project recognition module that automatically creates a run configuration, which can also be used to start the project.
+
+Docker-compose is used for creating and running Docker images.
+
+[NOTE]
+====
+The project includes a sampler-rest service that demonstrates the usage of the module.
+This example can run entirely on a local development machine. Therefore, it has no external dependencies.
+====
+
+=== Starting the weather-service server in various ways
+
+.IDE included Quarkus run config
+----
+Several browsers natively support Quarkus similarly to Spring Boot projects, recognizing it and creating their own run configurations.
+----
+
+.Maven quarkus:dev
+----
+mvn clean compile quarkus:dev
+----
+
+IMPORTANT: The project does not consist of a single module as Quarkus would expect, hence requiring compilation.
+
+NOTE: Using the Quarkus Maven plugin, the project can be started in dev mode, activating several development tools. For more information: https://quarkus.io/guides/dev-mode-differences.
+
+.Running Quarkus uber-jar in docker
+----
+mvn clean install <1>
+docker-compose -f <PROJECT_PATH>/weather/etc/docker-compose/docker-compose.local.weather-service.yml up --build --force-recreate <2>
+----
+
+<1> Therefore, it is necessary for the jar that goes into the Docker image to be built.
+<2> Running the docker-compose command in the project root initiates the Docker Compose build (forcing recreation with the --force-recreate parameter if necessary) and starts up the services (up).
+
+=== weather-service native
+
+.Quarkus native
+----
+mvn install -Pnative -Dnative -Dquarkus.native.additional-build-args="--initialize-at-run-time=hu.icellmobilsoft.coffee.tool.utils.string.RandomUtil","--initialize-at-run-time=hu.icellmobilsoft.coffee.se.util.string.RandomUtil","--add-opens java.base/java.net=ALL-UNNAMED"
+----
+
+.Quarkus native in docker
+----
+docker compose -f <PROJECT_PATH>/quarkus-sampler/etc/docker-compose/docker-compose.local.native.weather-service.yml up --build --force-recreate
+----
+
+== Possibilities for project configuration settings
+
+=== Quarkus-based configurations
+
+Since the application is based on Quarkus, it utilizes Quarkus' foundational settings.
+
+The description can be found here: https://quarkus.io/guides/all-config
+
+NOTE: Only those elements from the configuration list are active which are included in the project at the dependency level.
+
+Key elements that are already defined by default in the project:
+
+[cols="a,a,a,a"]
+|===
+| Quarkus config key | Description | Env variable | Default value
+
+| quarkus.arc.remove-unused-beans | Arc setting - remove unused beans: https://quarkus.io/guides/all-config#quarkus-arc_quarkus.arc.remove-unused-beans[Link] | - | false
+
+| quarkus.log.category."com.github.speter555".level | com.github.speter555 category log level | LOG_COM_GITHUB_SPETER555_LEVEL | INFO
+
+| quarkus.log.category."hu.icellmobilsoft".level | hu.icellmobilsoft category log level | LOG_HU_ICELLMOBILSOFT_LEVEL | INFO
+
+| quarkus.log.console.format | Console log format | - | `%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [thread:%t] [%c{10}] [sid:%X{extSessionId}] - %s%E%n`
+
+
+| quarkus.log.level | Quarkus log level: https://quarkus.io/guides/all-config#quarkus-core_quarkus.log.level[Link] | LOG_LEVEL | INFO
+| quarkus.log.min-level | Quarkus min log level: https://quarkus.io/guides/all-config#quarkus-core_quarkus.log.min-level[Link] | LOG_MIN_LEVEL | ALL
+
+| quarkus.package.add-runner-suffix | Quarkus package add runner suffix: https://quarkus.io/guides/all-config#quarkus-core_quarkus.package.add-runner-suffix[Link] | - | false
+| quarkus.package.type | Quarkus package type: https://quarkus.io/guides/all-config#quarkus-core_quarkus-package-jar-type[Link] | - | fast-jar
+
+| quarkus.smallrye-openapi.info-title | Openapi - info title : https://quarkus.io/guides/all-config#quarkus-smallrye-openapi_quarkus.smallrye-openapi.info-title[Link] | - |  Weather service
+| quarkus.smallrye-openapi.info-version | Openapi - info version : https://quarkus.io/guides/all-config#quarkus-smallrye-openapi_quarkus.smallrye-openapi.info-version[Link] | - | ${quarkus.application.version}
+
+| quarkus.smallrye-openapi.info-description | Openapi - info version : https://quarkus.io/guides/all-config#quarkus-smallrye-openapi_quarkus.smallrye-openapi.info-description[Link] | - |[source,html]
+----
+REST endpoints for operations. <br/>
+General responses in case of error:  <br/>
+* __400__ - Bad Request <br/>
+* __401__ - Unauthorized <br/>
+* __404__ - Not found <br/>
+* __418__ - Database object not found <br/>
+* __500__ - Internal Server Error <br/>
+----
+| quarkus.swagger-ui.enable | Enable swagger ui: https://quarkus.io/guides/all-config#quarkus-swagger-ui_quarkus.swagger-ui.enable[Link] | - | false
+
+|===
+
+=== Coffee-based configurations
+
+In addition, due to the use of the Coffee Toolset, the application contains additional configuration options.
+
+[cols="a,a,a,a"]
+|===
+| Coffee config key | Description | Env variable | Default value
+
+| coffee.app.name | Coffee app name in logs | - | ${quarkus.application.name}
+| coffee.config.resource.bundles | Resource bundles' config for i18n | - | i18n.common-messages,i18n.messages
+| coffee.config.xml.catalog.path | Catalog path of Super catalog.xml | - | xsd/com/github/speter555/weather/dto/super.catalog.xml
+|===
+
+=== Microprofile Openapi configuration
+
+Furthermore, related to Coffee, it also includes a MicroProfile OpenAPI filter configuration.
+
+[cols="a,a,a,a"]
+|===
+| MP Openapi config key | Description | Env variable | Default value
+
+| mp.openapi.filter | Microprofile openapi filter class with package | - | com.github.speter555.weather.common.rest.filter.OpenAPIFilter
+|===
+
+=== Agroal configurations
+
+The database connection management is similar to the pool managed by WildFly IronJacamar.
+Configuration and tuning options:
+
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_MIN_SIZE: The minimum number of connections. It is worth setting this if we need continuously initialized database connections.
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_MAX_SIZE: The maximum number of connections. It is essential to set an upper limit for the pool. Its size should be tuned according to the database-side maximum connection limits and the number of application instances.
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_INITIAL_SIZE: Specifies the number of pre-initialized connections at service startup. This is useful when preparing for burst loads or peak periods.
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_ACQUISITION_TIMEOUT: This operates similarly to the parameter in this script. This defines the time the pool has to provide a database connection. If the pool is full and the time expires, an exception will be thrown.
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_IDLE_REMOVAL_INTERVAL: The duration for which an initialized but idle connection remains in the pool. This parameter can be tuned to ensure that unnecessary active connections do not burden the database.
+- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_NEW_CONNECTION_SQL: For example, setting the schema or character encoding.
+- QUARKUS.TRANSACTION-MANAGER.DEFAULT-TRANSACTION-TIMEOUT: The transaction timeout. This differs significantly from WildFly's 5-minute default, being set to 1 minute by default. This is the time a transaction has to complete.
+
+Useful metrics have been implemented for a sample dashboard. TODO: Define and interpret the metrics.
+
+
+
+
+
+

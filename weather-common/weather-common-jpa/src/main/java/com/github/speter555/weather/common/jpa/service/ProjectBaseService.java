@@ -17,29 +17,20 @@
  * limitations under the License.
  * #L%
  */
-package com.github.speter555.weather.ts.common.rest;
+package com.github.speter555.weather.common.jpa.service;
 
-import hu.icellmobilsoft.coffee.dto.common.commonservice.ContextType;
-import hu.icellmobilsoft.coffee.tool.utils.date.DateUtil;
-import hu.icellmobilsoft.coffee.tool.utils.string.RandomUtil;
+import jakarta.enterprise.context.Dependent;
 
 /**
- * DTO helper
- *
+ * Base service parent for JPA exception handled functions
+ * 
  * @author speter555
  * @since 0.1.0
+ *
+ * @param <T>
+ *            entity class
  */
-public class DtoHelper {
+@Dependent
+public class ProjectBaseService<T> extends hu.icellmobilsoft.coffee.jpa.service.BaseService<T> {
 
-    /**
-     * Create basic ContextType
-     * 
-     * @return filled context
-     */
-    public static ContextType createContext() {
-        ContextType context = new ContextType();
-        context.setRequestId(RandomUtil.generateId());
-        context.setTimestamp(DateUtil.nowUTCTruncatedToMillis());
-        return context;
-    }
 }
