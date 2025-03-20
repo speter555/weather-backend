@@ -191,4 +191,19 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>native</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.ibm.async</groupId>
+                    <artifactId>asyncutil</artifactId>
+                    <version>0.1.0</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>
