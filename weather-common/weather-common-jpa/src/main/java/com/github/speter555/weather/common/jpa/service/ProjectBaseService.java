@@ -31,6 +31,6 @@ import jakarta.enterprise.context.Dependent;
  *            entity class
  */
 @Dependent
-public class BaseService<T> extends hu.icellmobilsoft.coffee.jpa.service.BaseService<T> {
+public class ProjectBaseService<T> extends hu.icellmobilsoft.coffee.jpa.service.BaseService<T> {
 
 }

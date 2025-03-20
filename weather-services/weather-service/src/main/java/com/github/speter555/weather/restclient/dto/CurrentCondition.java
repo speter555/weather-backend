@@ -27,6 +27,7 @@ import java.util.List;
  * @author speter555
  * @since 0.1.0
  */
+@SuppressWarnings("java:S100")
 public class CurrentCondition {
     private String FeelsLikeC;
     private String FeelsLikeF;

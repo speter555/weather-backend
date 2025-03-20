@@ -25,6 +25,7 @@ package com.github.speter555.weather.restclient.dto;
  * @author speter555
  * @since 0.1.0
  */
+@SuppressWarnings("java:S100")
 public class Request {
     private String query;
     private String type;
