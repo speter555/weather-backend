@@ -31,11 +31,11 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.github.speter555.weather.common.core.evictable.Evictable;
 import com.github.speter555.weather.dto.weather.weather.WeatherCityResponse;
-import com.github.speter555.weather.model.Weather;
+import com.github.speter555.weather.model.Weatherreport;
 import com.github.speter555.weather.restclient.dto.CurrentCondition;
 import com.github.speter555.weather.restclient.dto.WeatherResponse;
 import com.github.speter555.weather.restclient.wttrinapi.WttrInRestClient;
-import com.github.speter555.weather.service.WeatherService;
+import com.github.speter555.weather.service.WeatherreportService;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -53,7 +53,7 @@ import hu.icellmobilsoft.coffee.tool.utils.validation.ParamValidatorUtil;
 public class WeatherCityResponseCache implements Evictable {
 
     @Inject
-    WeatherService weatherService;
+    WeatherreportService weatherreportService;
 
     @Inject
     TransactionHelper transactionHelper;
@@ -96,27 +96,27 @@ public class WeatherCityResponseCache implements Evictable {
 
     private WeatherCityResponse init(String city) throws BaseException {
         ParamValidatorUtil.requireNonBlank(city, "city");
-        Optional<Weather> weatherOptional = weatherService.findOptionalLastWeatherByCity(city);
-        Weather weather = weatherOptional.orElse(null);
-        if (weather == null || Duration.between(weather.getRetrievedAt(), DateUtil.nowUTC().toLocalDateTime()).toMinutes() >= 30) {
-            weather = getWeatherAndSave(city);
+        Optional<Weatherreport> weatherOptional = weatherreportService.findOptionalLastWeatherByCity(city);
+        Weatherreport weatherreport = weatherOptional.orElse(null);
+        if (weatherreport == null || Duration.between(weatherreport.getRetrievedAt(), DateUtil.nowUTC().toLocalDateTime()).toMinutes() >= 30) {
+            weatherreport = getWeatherAndSave(city);
         }
-        return new WeatherCityResponse().withCity(city).withDescription(weather.getDescription()).withTemperature(weather.getTemperature());
+        return new WeatherCityResponse().withCity(city).withDescription(weatherreport.getDescription()).withTemperature(weatherreport.getTemperature());
     }
 
-    private Weather getWeatherAndSave(final String city) throws BaseException {
+    private Weatherreport getWeatherAndSave(final String city) throws BaseException {
         var now = DateUtil.nowUTC().toLocalDateTime();
         WeatherResponse weatherResponse = restClient.getWeatherByCity(city, "j2");
         if (weatherResponse.getCurrent_condition().isEmpty() || weatherResponse.getCurrent_condition().get(0).getWeatherDesc().isEmpty()) {
             throw new ServiceUnavailableException("current condition is empty OR weather description is empty");
         }
         CurrentCondition currentCondition = weatherResponse.getCurrent_condition().get(0);
-        Weather weather = new Weather();
-        weather.setCity(city);
-        weather.setDescription(currentCondition.getWeatherDesc().get(0).getValue());
-        weather.setTemperature(Integer.parseInt(currentCondition.getTemp_C()));
-        weather.setRetrievedAt(now);
-        return transactionHelper.executeWithTransaction(() -> weatherService.save(weather));
+        Weatherreport weatherreport = new Weatherreport();
+        weatherreport.setCity(city);
+        weatherreport.setDescription(currentCondition.getWeatherDesc().get(0).getValue());
+        weatherreport.setTemperature(Integer.parseInt(currentCondition.getTemp_C()));
+        weatherreport.setRetrievedAt(now);
+        return transactionHelper.executeWithTransaction(() -> weatherreportService.save(weatherreport));
     }
 
     @Override
