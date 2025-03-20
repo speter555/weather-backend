@@ -24,16 +24,16 @@ import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.QueryParam;
 import org.apache.deltaspike.data.api.Repository;
 
-import com.github.speter555.weather.model.Weather;
+import com.github.speter555.weather.model.Weatherreport;
 
 /**
- * Repository of {@link Weather}
+ * Repository of {@link Weatherreport}
  *
  * @author speter555
  * @since 0.1.0
  */
 @Repository
-public interface WeatherRepository extends EntityRepository<Weather, String> {
+public interface WeatherreportRepository extends EntityRepository<Weatherreport, String> {
 
     /**
      * Get Weather by city into Optional
@@ -42,7 +42,7 @@ public interface WeatherRepository extends EntityRepository<Weather, String> {
      *            weather data's city
      * @return Weather element
      */
-    @Query(value = "SELECT w FROM Weather w WHERE w.city = :city ORDER BY w.retrievedAt DESC", max = 1)
-    Weather findLastWeatherByCity(@QueryParam("city") String city);
+    @Query(value = "SELECT w FROM Weatherreport w WHERE w.city = :city ORDER BY w.retrievedAt DESC", max = 1)
+    Weatherreport findLastWeatherByCity(@QueryParam("city") String city);
 
 }

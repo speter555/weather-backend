@@ -25,21 +25,21 @@ import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 
 import com.github.speter555.weather.common.jpa.service.ProjectBaseService;
-import com.github.speter555.weather.model.Weather;
-import com.github.speter555.weather.repository.WeatherRepository;
+import com.github.speter555.weather.model.Weatherreport;
+import com.github.speter555.weather.repository.WeatherreportRepository;
 import hu.icellmobilsoft.coffee.se.api.exception.BaseException;
 
 /**
- * Jpa service of {@link Weather}
+ * Jpa service of {@link Weatherreport}
  *
  * @author speter555
  * @since 0.1.0
  */
 @Model
-public class WeatherService extends ProjectBaseService<Weather> {
+public class WeatherreportService extends ProjectBaseService<Weatherreport> {
 
     @Inject
-    WeatherRepository repository;
+    WeatherreportRepository repository;
 
     /**
      * Get Weather by city into Optional
@@ -50,7 +50,7 @@ public class WeatherService extends ProjectBaseService<Weather> {
      * @throws BaseException
      *             in case of error
      */
-    public Optional<Weather> findOptionalLastWeatherByCity(String city) throws BaseException {
+    public Optional<Weatherreport> findOptionalLastWeatherByCity(String city) throws BaseException {
         return wrapOptional(repository::findLastWeatherByCity, city, "findOptionalLastWeatherByCity", "city");
     }
 }

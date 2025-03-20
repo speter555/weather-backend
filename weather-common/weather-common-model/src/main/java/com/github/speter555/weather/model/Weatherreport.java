@@ -35,8 +35,8 @@ import hu.icellmobilsoft.coffee.model.base.AbstractIdentifiedEntity;
  * @since 0.1.0
  */
 @Entity
-@Table(name = "WEATHER")
-public class Weather extends AbstractIdentifiedEntity {
+@Table(name = "WEATHERREPORT")
+public class Weatherreport extends AbstractIdentifiedEntity {
 
     /**
      * City

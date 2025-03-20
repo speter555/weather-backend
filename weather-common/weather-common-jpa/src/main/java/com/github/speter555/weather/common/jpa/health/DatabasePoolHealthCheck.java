@@ -49,7 +49,7 @@ public class DatabasePoolHealthCheck {
     /**
      * key from persistence settings
      */
-    public static final String HIBERNATE_DIALECT = "HIBERNATE_DIALECT";
+    public static final String HIBERNATE_DIALECT = "quarkus.datasource.\"defaultDS\".db-kind";
 
     @Inject
     Logger logger;
