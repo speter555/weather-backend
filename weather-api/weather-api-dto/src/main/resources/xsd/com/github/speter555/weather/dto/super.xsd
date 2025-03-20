@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://super.dto.weather.speter555.github.com/super"
+        targetNamespace="http://super.dto.weather.speter555.github.com/super"
+        elementFormDefault="qualified" attributeFormDefault="unqualified"
+>
+
+    <xsd:import namespace="http://common.dto.weather.speter555.github.com/common" />
+    <xsd:import namespace="http://weather.dto.weather.speter555.github.com/weather" />
+</xsd:schema>

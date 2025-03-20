@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.speter555.weather</groupId>
+        <artifactId>weather-common</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>weather-common-jpa</artifactId>
+
+    <dependencies>
+
+        <!-- Project dependecies-->
+
+        <dependency>
+            <groupId>com.github.speter555.weather</groupId>
+            <artifactId>weather-common-model</artifactId>
+        </dependency>
+
+        <!-- Coffee dependencies -->
+
+        <dependency>
+            <groupId>hu.icellmobilsoft.coffee</groupId>
+            <artifactId>coffee-system-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.icellmobilsoft.coffee</groupId>
+            <artifactId>coffee-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.icellmobilsoft.coffee</groupId>
+            <artifactId>coffee-deltaspike-data-extension</artifactId>
+        </dependency>
+
+        <!-- Frappee dependecies-->
+        
+        <dependency>
+            <groupId>hu.icellmobilsoft.frappee</groupId>
+            <artifactId>frappee-hibernate-batch</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>hu.icellmobilsoft.frappee</groupId>
+            <artifactId>frappee-hibernate-batch-cdi</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>hu.icellmobilsoft.frappee</groupId>
+            <artifactId>frappee-hibernate-util-cdi</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
