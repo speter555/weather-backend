@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.speter555.weather</groupId>
+        <artifactId>weather-services</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>weather-service</artifactId>
+
+    <properties>
+        <jvm.args>--add-opens=java.base/java.net=ALL-UNNAMED</jvm.args>
+        <version.io.agroal>2.3</version.io.agroal>
+        <quarkus-micrometer-registry-otlp.version>3.2.4</quarkus-micrometer-registry-otlp.version>
+    </properties>
+
+    <dependencies>
+        <!-- Project dependecies-->
+        <dependency>
+            <groupId>com.github.speter555.weather</groupId>
+            <artifactId>weather-common-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.speter555.weather</groupId>
+            <artifactId>weather-common-rest</artifactId>
+        </dependency>
+
+        <!-- Coffee dependencies -->
+
+        <!-- Quarkus dependencies -->
+
+        <dependency>
+            <groupId>hu.icellmobilsoft.coffee</groupId>
+            <artifactId>coffee-deltaspike-data-extension-deployment</artifactId>
+<!--            TODO + 5MB -->
+            <exclusions>
+            	<exclusion>
+            		<groupId>jakarta.faces</groupId>
+            		<artifactId>jakarta.faces-api</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>jakarta.platform</groupId>
+            		<artifactId>jakarta.jakartaee-web-api</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>jakarta.platform</groupId>
+            		<artifactId>jakarta.jakartaee-api</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>org.junit.jupiter</groupId>
+            		<artifactId>junit-jupiter</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>org.junit.platform</groupId>
+            		<artifactId>junit-platform-launcher</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!-- Quarkus hibernate -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.agroal</groupId>
+          <artifactId>agroal-pool</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>io.agroal</groupId>
+          <artifactId>agroal-api</artifactId>
+        </dependency>
+        <dependency>
+           	<groupId>io.agroal</groupId>
+        	<artifactId>agroal-narayana</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-oracle</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+
+
+        <!--  Quarkus dependecies - JaxRS implementation - resteasy -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jaxb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jsonb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Servlet -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-undertow</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Yaml config use -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-config-yaml</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Openapi -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Gelf logging -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-logging-gelf</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Json logging -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-logging-json</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Rest client -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client-jsonb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client-jaxb</artifactId>
+        </dependency>
+
+        <!-- Quarkus dependecies - Health -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>io.quarkus</groupId>
+                            <artifactId>quarkus-extension-processor</artifactId>
+                            <version>${quarkus.platform.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://common.dto.weather.speter555.github.com/common"
+            xmlns:coffeeCommon="http://common.dto.coffee.icellmobilsoft.hu/common"
+            targetNamespace="http://common.dto.weather.speter555.github.com/common"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+    <xsd:import namespace="http://common.dto.coffee.icellmobilsoft.hu/common"/>
+    <xsd:import namespace="http://common.dto.coffee.icellmobilsoft.hu/commonservice"/>
+
+    <!-- SIMPLE TYPES -->
+
+    <xsd:simpleType name="TemperatureStringType">
+        <xsd:restriction base="coffeeCommon:SimpleText15NotBlankType">
+            <xsd:pattern value="\d+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ValueType">
+        <xsd:sequence>
+            <xsd:element name="value" type="coffeeCommon:SimpleText255NotBlankType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- COMPLEX TYPES -->
+
+</xsd:schema>
