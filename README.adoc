@@ -67,8 +67,10 @@ docker-compose -f <PROJECT_PATH>/weather/etc/docker-compose/docker-compose.local
 
 .Quarkus native
 ----
-mvn install -Pnative -Dnative -Dquarkus.native.additional-build-args="--initialize-at-run-time=hu.icellmobilsoft.coffee.tool.utils.string.RandomUtil","--initialize-at-run-time=hu.icellmobilsoft.coffee.se.util.string.RandomUtil","--add-opens java.base/java.net=ALL-UNNAMED"
+mvn install -Pnative -Dnative -Dquarkus.native.additional-build-args="--initialize-at-run-time=hu.icellmobilsoft.coffee.tool.utils.string.RandomUtil","--initialize-at-run-time=com.google.common.cache.Striped64","--initialize-at-run-time=com.google.common.cache.LongAddables","--trace-object-instantiation=java.util.Random","--initialize-at-run-time=hu.icellmobilsoft.coffee.se.util.string.RandomUtil","--add-opens java.base/java.net=ALL-UNNAMED"
 ----
+
+IMPORTANT: Deltaspike data is not working in native yet!
 
 .Quarkus native in docker
 ----

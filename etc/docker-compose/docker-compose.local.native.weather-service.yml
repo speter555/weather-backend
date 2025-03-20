@@ -1,39 +1,30 @@
 #version: "3.8"
 
 # run
-# docker compose -f <PROJECT_PATH>/etc/docker-compose/docker-compose.local.native.qs-rest-service.yml up --build --force-recreate
+# docker compose -f <PROJECT_PATH>/etc/docker-compose/docker-compose.local.native.weather-service.yml up --build --force-recreate
 #
 # run from project directory
-# docker compose -f ./etc/docker-compose/docker-compose.local.native.qs-rest-service.yml up --build --force-recreate
+# docker compose -f ./etc/docker-compose/docker-compose.local.native.weather-service.yml up --build --force-recreate
 #
 # enter container
-# docker exec -qs-rest-service-dev-native /bin/bash
+# docker exec -weather-service-dev-native /bin/bash
 #
 # empty run
-# docker run --rm -it qs-rest-service:develop-local-native /bin/bash
+# docker run --rm -it weather-service:develop-local-native /bin/bash
 services:
-    qs-rest-service:
-        container_name: qs-rest-service-dev-native
+    weather-service:
+        container_name: weather-service-dev-native
         build:
             context: ../../
 #            dockerfile: etc/docker-compose/local.native-jar.Dockerfile
             dockerfile: etc/docker-compose/local.native-micro-image.Dockerfile
             args:
                 ICELL_JAVA_JRE_BASE_IMAGE: 'icellmobilsoft/base-java21jre:1.4.0'
-                SERVICE: 'qs-rest-service'
-        image: "qs-rest-service:develop-local-native"
+                SERVICE: 'weather-service'
+        image: "weather-service:develop-local-native"
         environment:
             # With this config, service use application-dev.yml!
             - MP_CONFIG_PROFILE=dev
-            #etcd
-            - COFFEE_ETCD_DEFAULT_URL=http://qs-etcd:2379
-            #gelf
-            - SAMPLER_GELF_ENABLED=false
-            - SAMPLER_GELF_HOST=graylog
-            - SAMPLER_GELF_PORT=12201
-            - SAMPLER_GELF_MODULE_VERSION=0.1.0-SNAPSHOT
-            - SAMPLER_GELF_MODULE_ID=qs-rest-service-dev
-            - SAMPLER_GELF_K8S_NAMESPACE=qs-k8s
         ports:
             - '8080:8080' # REST
             - '5005:5005' # Debug
@@ -50,4 +41,4 @@ networks:
     default:
         external:
             # if it could not be found on compose up, then execute: docker network create quarkus-sampler-local-network
-            name: quarkus-sampler-local-network
+            name: weather-local-network
