@@ -24,7 +24,7 @@ import jakarta.enterprise.context.Dependent;
 /**
  * Base service parent for JPA exception handled functions
  * 
- * @author imre.scheffer
+ * @author speter555
  * @since 0.1.0
  *
  * @param <T>

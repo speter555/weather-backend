@@ -1,8 +1,8 @@
 /*-
  * #%L
- * weather
+ * Quarkus-sampler
  * %%
- * Copyright (C) 2025 speter555
+ * Copyright (C) 2024 i-Cell Mobilsoft Zrt.
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import io.quarkus.agroal.DataSource;
 /**
  * Implement a project-level interceptor to prevent commits upon connection closure in the event of a shutdown.
  * 
- * @author czenczl
+ * @author speter555
  * @since 0.1.0
  */
 @ApplicationScoped

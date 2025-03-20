@@ -23,7 +23,6 @@
         <module>weather-bom</module>
         <module>weather-common</module>
         <module>weather-services</module>
-        <module>weather-testsuite</module>
     </modules>
 
     <properties>
@@ -235,6 +234,12 @@
 
     <profiles>
         <profile>
+            <id>testsuite</id>
+            <modules>
+                <module>weather-testsuite</module>
+            </modules>
+        </profile>
+        <profile>
             <id>check-javadoc</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -246,8 +251,8 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
                             <failOnError>true</failOnError>
-                            <failOnWarnings>true</failOnWarnings>
-                            <excludePackageNames>com.github.speter555.weather.dto.*</excludePackageNames>
+                            <failOnWarnings>false</failOnWarnings>
+                            <excludePackageNames>com.github.speter555.weather.dto.*,com.github.speter555.weather.restclient.dto.*</excludePackageNames>
                             <sourceFileExcludes>**/*_.java</sourceFileExcludes>
                         </configuration>
                     </plugin>

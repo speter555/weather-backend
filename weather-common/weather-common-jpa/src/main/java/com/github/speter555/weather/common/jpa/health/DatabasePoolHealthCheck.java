@@ -35,9 +35,8 @@ import hu.icellmobilsoft.coffee.se.logging.Logger;
 /**
  * Health check for database pool availability
  * 
- * @author czenczl
- * @author Imre Scheffer
- * @since 2.5.0
+ * @author speter555
+ * @since 0.1.0
  *
  */
 @ApplicationScoped

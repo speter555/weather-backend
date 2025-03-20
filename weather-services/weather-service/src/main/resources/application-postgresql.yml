@@ -3,6 +3,7 @@
 # mvn quarkus:dev -Dquarkus.profile=postgresql
 # clean install -Dquarkus.profile=postgresql
 #-------------------------------
+
 quarkus:
   datasource:
     metrics:
@@ -11,11 +12,11 @@ quarkus:
       jdbc:
         min-size: 5
         max-size: 20
-        telemetry: true
-        url: jdbc:postgresql://localhost:5432/qs_service
+        # Ha nincs url, automatikusan indítja a dev servicet
+        url: ""
       db-kind: postgresql
-      username: qs_service
-      password: qs_service
+      username: quarkus
+      password: quarkus
   hibernate-orm:
     packages: com.github.speter555.weather.model,hu.icellmobilsoft.coffee.model.base
     dialect: org.hibernate.dialect.PostgreSQLDialect

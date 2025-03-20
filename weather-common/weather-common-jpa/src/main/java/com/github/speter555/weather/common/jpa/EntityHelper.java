@@ -29,7 +29,7 @@ import io.quarkus.arc.Unremovable;
 /**
  * Entity helper class
  *
- * @author imre.scheffer
+ * @author speter555
  * @since 0.1.0
  */
 @Named
