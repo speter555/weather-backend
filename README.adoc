@@ -154,12 +154,12 @@ Furthermore, related to Coffee, it also includes a MicroProfile OpenAPI filter c
 The database connection management is similar to the pool managed by WildFly IronJacamar.
 Configuration and tuning options:
 
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_MIN_SIZE: The minimum number of connections. It is worth setting this if we need continuously initialized database connections.
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_MAX_SIZE: The maximum number of connections. It is essential to set an upper limit for the pool. Its size should be tuned according to the database-side maximum connection limits and the number of application instances.
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_INITIAL_SIZE: Specifies the number of pre-initialized connections at service startup. This is useful when preparing for burst loads or peak periods.
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_ACQUISITION_TIMEOUT: This operates similarly to the parameter in this script. This defines the time the pool has to provide a database connection. If the pool is full and the time expires, an exception will be thrown.
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_IDLE_REMOVAL_INTERVAL: The duration for which an initialized but idle connection remains in the pool. This parameter can be tuned to ensure that unnecessary active connections do not burden the database.
-- QUARKUS_DATASOURCE_ICELLMOBILSOFTDS_JDBC_NEW_CONNECTION_SQL: For example, setting the schema or character encoding.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_MIN_SIZE: The minimum number of connections. It is worth setting this if we need continuously initialized database connections.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_MAX_SIZE: The maximum number of connections. It is essential to set an upper limit for the pool. Its size should be tuned according to the database-side maximum connection limits and the number of application instances.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_INITIAL_SIZE: Specifies the number of pre-initialized connections at service startup. This is useful when preparing for burst loads or peak periods.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_ACQUISITION_TIMEOUT: This operates similarly to the parameter in this script. This defines the time the pool has to provide a database connection. If the pool is full and the time expires, an exception will be thrown.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_IDLE_REMOVAL_INTERVAL: The duration for which an initialized but idle connection remains in the pool. This parameter can be tuned to ensure that unnecessary active connections do not burden the database.
+- QUARKUS_DATASOURCE_DEAFULTDS_JDBC_NEW_CONNECTION_SQL: For example, setting the schema or character encoding.
 - QUARKUS.TRANSACTION-MANAGER.DEFAULT-TRANSACTION-TIMEOUT: The transaction timeout. This differs significantly from WildFly's 5-minute default, being set to 1 minute by default. This is the time a transaction has to complete.
 
 Useful metrics have been implemented for a sample dashboard. TODO: Define and interpret the metrics.
