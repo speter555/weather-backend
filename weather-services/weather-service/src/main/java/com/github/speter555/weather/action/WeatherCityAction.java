@@ -19,9 +19,13 @@
  */
 package com.github.speter555.weather.action;
 
+import hu.icellmobilsoft.coffee.tool.utils.json.JsonUtil;
 import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+
+import com.github.speter555.weather.common.reactive.message.WeatherReactiveMessageConstants;
 import com.github.speter555.weather.dto.weather.weather.WeatherCityResponse;
 import hu.icellmobilsoft.coffee.dto.common.commonservice.ContextType;
 import hu.icellmobilsoft.coffee.rest.action.AbstractBaseAction;
@@ -29,6 +33,8 @@ import hu.icellmobilsoft.coffee.se.api.exception.BaseException;
 import hu.icellmobilsoft.coffee.se.util.string.RandomUtil;
 import hu.icellmobilsoft.coffee.tool.utils.date.DateUtil;
 import hu.icellmobilsoft.coffee.tool.utils.validation.ParamValidatorUtil;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.Message;
 
 /**
  * Get weather by city
@@ -41,6 +47,10 @@ public class WeatherCityAction extends AbstractBaseAction {
 
     @Inject
     WeatherCityResponseCache weatherCityResponseCache;
+
+    @Inject
+    @Channel(WeatherReactiveMessageConstants.Channel.LOGGING_CHANNEL)
+    Emitter<String> emitter;
 
     @Override
     public ContextType createContext() {
@@ -64,6 +74,8 @@ public class WeatherCityAction extends AbstractBaseAction {
         response.setDescription(cacheResult.getDescription());
         response.setTemperature(cacheResult.getTemperature());
         handleSuccessResultType(response);
+
+        emitter.send(Message.of(JsonUtil.toJson(cacheResult)));
         return response;
     }
 }

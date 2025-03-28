@@ -1,8 +1,8 @@
 /*-
  * #%L
- * weather
+ * Weather-backend
  * %%
- * Copyright (C) 2025 speter555
+ * Copyright (C) 2025 i-Cell Mobilsoft Zrt.
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,26 @@
  * limitations under the License.
  * #L%
  */
-package com.github.speter555.weather.shutdown;
-
-import jakarta.enterprise.event.Observes;
-
-import io.quarkus.runtime.ShutdownEvent;
+package com.github.speter555.weather.common.reactive.message;
 
 /**
- * Support for shutdown event
- * 
- * @author czenczl
- * @since 0.1.0
+ * Project Reactive message constants
  */
-public class ShutDownSupport {
+public interface WeatherReactiveMessageConstants {
 
     /**
-     * ShutDown flag
+     * Channels constants
      */
-    public static boolean shutDown = false;
+    interface Channel {
 
-    /**
-     * collect shutdown event information
-     * 
-     * @param ev
-     *            shutdown event
-     */
-    public void init(@Observes ShutdownEvent ev) {
-        shutDown = true;
+        /**
+         * Logging chanel
+         */
+        String LOGGING_CHANNEL = "logging";
+
+        /**
+         * Logging chanel Consumer
+         */
+        String LOGGING_CONSUMER_CHANNEL = "logging-consumer";
     }
-
 }

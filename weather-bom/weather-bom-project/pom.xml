@@ -69,6 +69,11 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.github.speter555.weather</groupId>
+                <artifactId>weather-common-reactive-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Services -->
             <dependency>

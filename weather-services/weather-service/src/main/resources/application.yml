@@ -17,6 +17,24 @@ coffee:
 mp:
   openapi:
     filter: com.github.speter555.weather.common.rest.filter.OpenAPIFilter
+  messaging:
+    outgoing:
+      # emitter
+      logging:
+        connector: reactive-messaging-redis-streams
+        stream-key: weather-stream
+        xadd-maxlen: 1000
+        xadd-ttl-ms: 1000
+    incoming:
+      # consumer
+      logging-consumer:
+          connector: reactive-messaging-redis-streams
+          stream-key: weather-stream
+          group: weather-service
+          xread-block-ms: 60000
+    connector:
+      reactive-messaging-redis-streams:
+        graceful-timeout-ms: 10000
 
 #-------------------------------
 # Quarkus settings
@@ -96,4 +114,10 @@ quarkus:
       * __500__ - Internal Server Error <br/>
   swagger-ui:
     enable: false
+
+smallrye:
+  messaging:
+    worker:
+      incoming-pool:
+        max-concurrency: 15
 

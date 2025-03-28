@@ -20,6 +20,7 @@
         <module>weather-common-rest</module>
         <module>weather-common-model</module>
         <module>weather-common-jpa</module>
+        <module>weather-common-reactive-message</module>
     </modules>
 
 

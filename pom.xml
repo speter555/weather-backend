@@ -251,9 +251,12 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <configuration>
                             <failOnError>true</failOnError>
-                            <failOnWarnings>false</failOnWarnings>
-                            <excludePackageNames>com.github.speter555.weather.dto.*,com.github.speter555.weather.restclient.dto.*</excludePackageNames>
-                            <sourceFileExcludes>**/*_.java</sourceFileExcludes>
+                            <failOnWarnings>true</failOnWarnings>
+                            <excludePackageNames>com.github.speter555.weather.dto.*:com.github.speter555.weather.restclient.dto
+                            </excludePackageNames>
+                            <sourceFileExcludes>
+                                <sourceFileExclude>**/*_.java</sourceFileExclude>
+                            </sourceFileExcludes>
                         </configuration>
                     </plugin>
                 </plugins>
